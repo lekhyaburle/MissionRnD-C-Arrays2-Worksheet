@@ -13,13 +13,25 @@ ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
 */
-
+#include<string.h>
 struct transaction {
 	int amount;
 	char date[11];
 	char description[20];
 };
-
 int countGreaterNumbers(struct transaction *Arr, int len, char *date) {
+	int i, c = 0;
+	if (Arr==nullptr)
 	return -1;
+	for (i = 0; i <= len; i++)
+	{
+		if (strcmp(Arr[i].date, date) == 0)
+		{
+			if (strcmp(Arr[i].date, Arr[i + 1].date) == 0){
+				return 0;
+			}
+			return (len - 1 - i);
+		}
+	}
+ return 0;
 }
