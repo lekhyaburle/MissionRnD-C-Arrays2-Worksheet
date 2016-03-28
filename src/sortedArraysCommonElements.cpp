@@ -26,19 +26,23 @@ struct transaction {
 };
 
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	int i =1, j = 1,l=0,c=0;
-	struct transaction * common = (struct transaction *)malloc(sizeof(struct transaction *));
+	int i =0, j = 0,l=0;
+	
+struct transaction *common = (struct transaction *)malloc(sizeof(struct transaction *)*(ALen));
 	if (A==NULL||B==NULL)	
 	return NULL;
-	for (i = 1; i <= ALen;i++)
+	for (i = 0; i <ALen;i++)
 	{
-			if (A[i].date==B[i].date)
+		for (j = 0; j < BLen; j++)
+		{
+			if (strcmp(A[i].date, B[j].date) == 0)
 			{
-				common[j]=A[i];
-				j++;
-			}	
+			  common[l]= A[i];
+			  l++;
+			}
+		}
 	}
-	if (j==1)
+	if (l==0)
 		return NULL;
 	else 
 		return common;

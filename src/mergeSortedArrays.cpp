@@ -23,5 +23,28 @@ struct transaction {
 };
 
 struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen) {
+	int i = 1, j = 1,k=0;	
+	if (A==NULL||B==NULL)
 	return NULL;
+	for (i = 1; i <= ALen; i++)
+	{
+		for (j = 1; j < BLen; j++)
+		{
+			if ((A[i].date) > (B[j].date))
+			{
+
+				ALen++;
+				k = ALen;
+				do
+				{
+					A[k] = A[k - 1];
+					k--;
+				} while (k != i);
+				A[i] = B[j];
+				i++;
+				break;
+			}
+		}
+	}
+	return A;
 }
