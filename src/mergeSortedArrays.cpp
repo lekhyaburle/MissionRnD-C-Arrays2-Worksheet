@@ -12,9 +12,12 @@ OUTPUT: Combined statement ordered by transaction date.
 ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
+
 */
 
 #include <iostream>
+#include<malloc.h>
+#include<string.h>
 
 struct transaction {
 	int amount;
@@ -23,28 +26,41 @@ struct transaction {
 };
 
 struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	int i = 1, j = 1,k=0;	
-	if (A==NULL||B==NULL)
-	return NULL;
-	for (i = 1; i <= ALen; i++)
+	
+	if (A == NULL || B == NULL)
+		return NULL;
+	int i = 0, j = 0, k = 0,CLen=ALen+BLen;
+	struct transaction * C = (struct transaction *)malloc(sizeof(struct transaction )*(20));
+	while (i<ALen||j<BLen)
 	{
-		for (j = 1; j < BLen; j++)
+		if (i == ALen)
 		{
-			if ((A[i].date) > (B[j].date))
-			{
-
-				ALen++;
-				k = ALen;
-				do
-				{
-					A[k] = A[k - 1];
-					k--;
-				} while (k != i);
-				A[i] = B[j];
-				i++;
-				break;
-			}
+			C[k] = B[j]; j++; k++;
 		}
+		else if (j == BLen)
+		{
+			C[k] = A[i];
+			k++; i++;
+		}
+		else if ((A[i].amount) < (B[j].amount))
+			{                                                                                            
+				C[k] = A[i];
+				k++; i++;
+			}
+		else if (B[j].amount<A[i].amount)
+			{
+				C[k] = B[j];
+				k++; j++;
+				
+			}
+			
+		else
+			{
+				C[k] = A[i];
+				k++;
+				C[k] = B[j];
+				k++; i++; j++;
+			}		
 	}
-	return A;
+	return C;
 }

@@ -28,7 +28,7 @@ struct transaction {
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
 	int i =0, j = 0,l=0;
 	
-struct transaction *common = (struct transaction *)malloc(sizeof(struct transaction *)*(ALen));
+struct transaction *common = (struct transaction *)malloc(sizeof(struct transaction )*(ALen));
 	if (A==NULL||B==NULL)	
 	return NULL;
 	for (i = 0; i <ALen;i++)
